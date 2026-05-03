@@ -5,12 +5,14 @@
 #include <vector>
 #include <memory>
 #include "Formatter.hpp"
+#include <mutex>
 namespace Logger
 {
 class Logger
 {
     private:
     std::string name;
+    std::mutex sinksMutex, formatterMutex;
     std::vector<std::shared_ptr<Sink>> sinks;
     std::shared_ptr<Formatter> formatter;
 public:

@@ -10,6 +10,7 @@ Created on: 2024-06-15
 namespace Logger
 {
     void ConsoleSink::log(const std::string &message) {
+        std::lock_guard<std::mutex> lock(consoleMutex);
         std::cout << message << std::endl;
     }
 }

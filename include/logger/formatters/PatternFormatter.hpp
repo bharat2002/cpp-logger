@@ -11,6 +11,7 @@ namespace Logger
 
             return "[" + msg->getLoggerName() + "] "
                    + "[" + timeStr + "] " +
+                   + "[" + std::to_string(msg->getThreadId()) + "] " +
                    "[" + logLevelToString(msg->getLevel()) + "] "
                    + "[" + msg->getMessage() + "]";
         }

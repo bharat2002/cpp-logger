@@ -7,7 +7,8 @@ namespace Logger
         {
             return "{ \"logger\": \"" + msg->getLoggerName() + "\", "
                    "\"level\": " + logLevelToString(msg->getLevel()) + ", "
-                   "\"message\": \"" + msg->getMessage() + "\","
+                   "\"message\": \"" + msg->getMessage() + "\","+
+                   "\"threadId\": \"" + std::to_string(msg->getThreadId()) + "\", " +
                    "\"timestamp\": \"" + std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(msg->getTimestamp().time_since_epoch()).count()) + "\" }";
                    
         }
