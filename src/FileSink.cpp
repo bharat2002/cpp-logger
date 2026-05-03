@@ -7,13 +7,11 @@
 namespace Logger
 {
     FileSink::FileSink(const std::string& filename) : filename(filename) {}
-    void FileSink::log(const std::shared_ptr<LogMessage>& msg)
+    void FileSink::log(const std::string &message)
         {
             std::ofstream file(filename, std::ios::app);
             if (file.is_open()) {
-                file << "[" << msg->getLoggerName() << "] "
-                     << "[" << static_cast<int>(msg->getLevel()) << "] "
-                     << msg->getMessage() << std::endl;
+                file << message << std::endl;
             }
         }
     }

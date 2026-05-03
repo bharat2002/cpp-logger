@@ -7,6 +7,6 @@ namespace Logger
     class ConsoleSink : public Sink
     {
     public:
-        void log(const std::shared_ptr<LogMessage>& msg) override;
+        void log(const std::string &message) override;
     };
 }

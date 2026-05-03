@@ -10,7 +10,7 @@ namespace Logger
     public:
         FileSink(const std::string& filename);
 
-        void log(const std::shared_ptr<LogMessage>& msg) override;
+        void log(const std::string &message) override;
 
     private:
         std::string filename;
