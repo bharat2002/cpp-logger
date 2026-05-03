@@ -5,9 +5,13 @@ namespace Logger
     public:
         std::string format(const std::shared_ptr<LogMessage>& msg) override
         {
+            std::time_t time = std::chrono::system_clock::to_time_t(msg->getTimestamp());
+            char timeStr[20];
+            std::strftime(timeStr, sizeof(timeStr), "%Y-%m-%d %H:%M:%S", std::localtime(&time));
+
             return "[" + msg->getLoggerName() + "] "
-                   + "[" + std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(msg->getTimestamp().time_since_epoch()).count()) + "] " +
-                   "[" + std::to_string(static_cast<int>(msg->getLevel())) + "] "
+                   + "[" + timeStr + "] " +
+                   "[" + logLevelToString(msg->getLevel()) + "] "
                    + "[" + msg->getMessage() + "]";
         }
     };

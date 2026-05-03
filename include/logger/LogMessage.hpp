@@ -15,6 +15,7 @@ namespace Logger
         const std::string& getMessage() const { return message; }
         const std::string& getLoggerName() const { return loggerName; }
         std::chrono::system_clock::time_point getTimestamp() const { return timestamp; }
+        void setTimestamp(const std::chrono::system_clock::time_point& ts) { timestamp = ts; }
         std::thread::id getThreadId() const { return threadId; }
         LogLevel getLevel() const { return level; }
 

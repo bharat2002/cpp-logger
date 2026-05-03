@@ -6,9 +6,10 @@ Logger::Logger(const std::string& name) : name(name) {}
 void Logger::log(const std::string& message, LogLevel msgLevel)
 {
     std::shared_ptr<LogMessage> logMsg = std::make_shared<LogMessage>(message, name, msgLevel);
-    
+    logMsg->setTimestamp(std::chrono::system_clock::now());
+    std::string formattedMessage = formatter ? formatter->format(logMsg) : message;
     for (const auto& sink : sinks) {
-        sink->log(formatter->format(logMsg));
+        sink->log(formattedMessage);
     }
 }
 
