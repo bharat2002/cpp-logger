@@ -3,14 +3,15 @@
 #include <logger/LogLevel.h>
 #include <logger/LogMessage.hpp>
 #include <fstream>
+#include <logger/formatters/PatternFormatter.hpp>
 namespace Logger
 {
     class FileSink : public Sink
     {
     public:
-        FileSink(const std::string& filename);
+        FileSink(const std::string& filename, std::shared_ptr<Formatter> formatter = std::make_shared<PatternFormatter>(), LogLevel minLevel = LogLevel::TRACE);
 
-        void log(const std::string &message) override;
+        void write(const std::string &message) override;
 
     private:
         std::string filename;

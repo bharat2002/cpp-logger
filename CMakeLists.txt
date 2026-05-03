@@ -37,5 +37,5 @@ target_link_libraries(cpp_logger PRIVATE CURL::libcurl)
 
 add_executable(testLog)
 target_sources(testLog PRIVATE tests/testLog.cpp)
-target_link_libraries(testLog PRIVATE cpp_logger)
+target_link_libraries(testLog PRIVATE cpp_logger pthread)
 include_directories("include/logger")

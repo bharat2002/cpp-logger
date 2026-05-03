@@ -16,14 +16,15 @@ namespace Logger
         const std::string& getLoggerName() const { return loggerName; }
         std::chrono::system_clock::time_point getTimestamp() const { return timestamp; }
         void setTimestamp(const std::chrono::system_clock::time_point& ts) { timestamp = ts; }
-        std::thread::id getThreadId() const { return threadId; }
+        size_t getThreadId() const { return threadId; }
+        void setThreadId(size_t id) { threadId = id; }
         LogLevel getLevel() const { return level; }
 
     private:
         std::string message;
         std::string loggerName;
         std::chrono::system_clock::time_point timestamp;
-        std::thread::id threadId;
+        size_t threadId;
         LogLevel level;
     };
 }
