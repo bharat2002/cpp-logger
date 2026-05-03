@@ -9,7 +9,8 @@ Created on: 2024-06-15
 #include <logger/sinks/ConsoleSink.h>
 namespace Logger
 {
-    void ConsoleSink::log(const std::string &message) {
+    ConsoleSink::ConsoleSink(std::shared_ptr<Formatter> formatter, LogLevel minLevel) : Sink(formatter, minLevel) {}
+    void ConsoleSink::write(const std::string &message) {
         std::lock_guard<std::mutex> lock(consoleMutex);
         std::cout << message << std::endl;
     }

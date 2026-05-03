@@ -1,3 +1,4 @@
+#pragma once
 namespace Logger
 {
     class PatternFormatter : public Formatter

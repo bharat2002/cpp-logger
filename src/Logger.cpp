@@ -20,9 +20,8 @@ void Logger::processLogs() {
             std::shared_ptr<LogMessage> msg = logQueue.front();
             logQueue.pop();
             lock.unlock();
-            std::string formatted = formatter->format(msg);
             for (auto& sink : sinks) {
-                sink->log(formatted);
+                sink->log(msg);
             }
             lock.lock();
         }
@@ -51,10 +50,7 @@ void Logger::addSink(std::shared_ptr<Sink> sink) {
     sinks.push_back(sink);
 }
 
-void Logger::setFormatter(std::shared_ptr<Formatter> fmt) {
-    std::lock_guard<std::mutex> lock(formatterMutex);
-    formatter = fmt;
-}
+
 Logger::~Logger() {
     running.store(false);
     logCondition.notify_all();

@@ -2,6 +2,7 @@
 #include <logger/LogMessage.hpp>
 #include <iostream>
 #include <mutex>
+#include <logger/formatters/PatternFormatter.hpp>
 namespace Logger
 {
     class ConsoleSink : public Sink
@@ -9,6 +10,7 @@ namespace Logger
     private:
         std::mutex consoleMutex; 
     public:
-        void log(const std::string &message) override;
+        ConsoleSink(std::shared_ptr<Formatter> formatter = std::make_shared<PatternFormatter>(), LogLevel minLevel = LogLevel::TRACE);
+        void write(const std::string &message) override;
     };
 }

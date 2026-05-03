@@ -21,14 +21,12 @@ class Logger
     std::thread workerThread;
     std::atomic<bool> running{true};
     std::string name;
-    std::mutex sinksMutex, formatterMutex;
+    std::mutex sinksMutex;
     std::vector<std::shared_ptr<Sink>> sinks;
-    std::shared_ptr<Formatter> formatter;
     void processLogs();
 public:
     Logger(const std::string& name);
     void addSink(std::shared_ptr<Sink> sink);
-    void setFormatter(std::shared_ptr<Formatter> fmt);
     void log(const std::string& message, LogLevel msgLevel);
     ~Logger();
 };
