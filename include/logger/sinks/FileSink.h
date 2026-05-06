@@ -10,7 +10,6 @@ namespace Logger
     {
     public:
         FileSink(const std::string& filename, std::shared_ptr<Formatter> formatter = std::make_shared<PatternFormatter>(), LogLevel minLevel = LogLevel::TRACE);
-
         void write(const std::string &message) override;
 
     private:

@@ -12,6 +12,7 @@ set(CPP_LOGGER_SOURCES
     src/Logger.cpp
     src/FileSink.cpp
     src/ConsoleSink.cpp
+    src/ColorFormatter.cpp
 )
 
 add_library(cpp_logger STATIC ${CPP_LOGGER_SOURCES})

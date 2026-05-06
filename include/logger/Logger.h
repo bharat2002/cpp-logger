@@ -10,6 +10,7 @@
 #include <condition_variable>
 #include <thread>
 #include <atomic>
+#include <logger/OverFlowPolicy.hpp>
 namespace Logger
 {
 class Logger
@@ -24,8 +25,10 @@ class Logger
     std::mutex sinksMutex;
     std::vector<std::shared_ptr<Sink>> sinks;
     void processLogs();
+    size_t maxQueueSize_;
+    OverflowPolicy overflowPolicy_;
 public:
-    Logger(const std::string& name);
+    Logger(const std::string& name, size_t maxQueueSize_ = 10000, OverflowPolicy overflowPolicy = OverflowPolicy::DROP_NEW);
     void addSink(std::shared_ptr<Sink> sink);
     void log(const std::string& message, LogLevel msgLevel);
     ~Logger();
