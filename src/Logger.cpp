@@ -17,12 +17,16 @@ void Logger::processLogs() {
         );
 
         while (!logQueue.empty()) {
-            std::shared_ptr<LogMessage> msg = logQueue.front();
-            logQueue.pop();
+            std::queue<std::shared_ptr<LogMessage>> tempQueue;
+            std::swap(tempQueue, logQueue);            
             lock.unlock();
             std::lock_guard<std::mutex> lock_grd(sinksMutex);
-            for (auto& sink : sinks) {
-                sink->log(msg);
+            while (!tempQueue.empty()) {
+                auto msg = tempQueue.front();
+                tempQueue.pop();
+                for (const auto& sink : sinks) {
+                    sink->log(msg);
+                }
             }
             lock.lock();
         }
